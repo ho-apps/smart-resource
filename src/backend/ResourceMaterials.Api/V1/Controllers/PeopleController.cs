@@ -23,7 +23,7 @@ namespace ResourceMaterials.Api.V1.Controllers{
         [ProducesResponseType( typeof( Person ), 200 )]
         [ProducesResponseType( 404 )]
         public IActionResult Get( int id ) =>
-            Ok( new Person()
+            Ok( new Person
                 {
                     Id = id,
                     FirstName = "John",

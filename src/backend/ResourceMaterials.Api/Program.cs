@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace ResourceMaterials.Api
 {
@@ -19,6 +15,18 @@ namespace ResourceMaterials.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseStartup<Startup>()
+                .ConfigureAppConfiguration((builderContext, config) =>
+                {
+                    var configurationBuilder = new ConfigurationBuilder();
+                    configurationBuilder.AddEnvironmentVariables();
+                    config.AddJsonFile(Path.Combine("configuration", "configuration.json"), true, true);
+                    config.AddConfiguration(configurationBuilder.Build());
+                }).ConfigureLogging((hostingContext, builder) =>
+                {
+                    builder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                });
     }
 }

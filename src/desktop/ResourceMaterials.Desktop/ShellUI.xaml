@@ -1,0 +1,36 @@
+﻿<ui:MetroWindow
+    x:Class="ResourceMaterials.Desktop.ShellUI"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:ResourceMaterials.Desktop"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
+    Title="{Binding Title}"
+    Width="800"
+    Height="450"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <ui:MetroWindow.RightWindowCommands>
+        <ui:WindowCommands>
+            <Button Content="settings" />
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <icons:PackIconModern
+                        Width="24"
+                        Height="24"
+                        Kind="_3dObj" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="deploy cupcakes" />
+                </StackPanel>
+            </Button>
+        </ui:WindowCommands>
+    </ui:MetroWindow.RightWindowCommands>
+    <Grid />
+</ui:MetroWindow>

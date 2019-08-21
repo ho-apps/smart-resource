@@ -23,21 +23,21 @@ namespace ResourceMaterials.Api.V2.Controllers{
         {
             var people = new[]
             {
-                new Person()
+                new Person
                 {
                     Id = 1,
                     FirstName = "John",
                     LastName = "Doe",
                     Email = "john.doe@somewhere.com"
                 },
-                new Person()
+                new Person
                 {
                     Id = 2,
                     FirstName = "Bob",
                     LastName = "Smith",
                     Email = "bob.smith@somewhere.com"
                 },
-                new Person()
+                new Person
                 {
                     Id = 3,
                     FirstName = "Jane",
@@ -61,7 +61,7 @@ namespace ResourceMaterials.Api.V2.Controllers{
         [ProducesResponseType( typeof( Person ), 200 )]
         [ProducesResponseType( 404 )]
         public IActionResult Get( int id ) =>
-            Ok( new Person()
+            Ok( new Person
                 {
                     Id = id,
                     FirstName = "John",

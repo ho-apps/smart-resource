@@ -24,15 +24,20 @@ namespace ResourceMaterials.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddHealthChecks();
+
             // the sample application always uses the latest version, but you may want an explicit version such as Version_2_2
             // note: Endpoint Routing is enabled by default; however, if you need legacy style routing via IRouter, change it to false
             services.AddMvc( options => options.EnableEndpointRouting = true ).SetCompatibilityVersion( Latest );
+
             services.AddApiVersioning(
                 options =>
                 {
                     // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
                     options.ReportApiVersions = true;
                 } );
+
             services.AddVersionedApiExplorer(
                 options =>
                 {
@@ -44,13 +49,14 @@ namespace ResourceMaterials.Api
                     // can also be used to control the format of the API version in route templates
                     options.SubstituteApiVersionInUrl = true;
                 } );
+
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
             services.AddSwaggerGen(
                 options =>
                 {
                     // add a custom operation filter which sets default values
                     options.OperationFilter<SwaggerDefaultValues>();
-
                     // integrate xml comments
                     options.IncludeXmlComments( XmlCommentsFilePath );
                 } );
@@ -59,17 +65,19 @@ namespace ResourceMaterials.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
         {
-            app.UseMvc();
+            app.UseHealthChecks("/liveness");
             app.UseSwagger();
             app.UseSwaggerUI(
                 options =>
                 {
                     // build a swagger endpoint for each discovered API version
-                    foreach ( var description in provider.ApiVersionDescriptions )
+                    foreach (var description in provider.ApiVersionDescriptions)
                     {
-                        options.SwaggerEndpoint( $"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant() );
+                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
-                } );
+                });
+            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
 
          static string XmlCommentsFilePath
