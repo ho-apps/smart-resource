@@ -8,7 +8,7 @@ namespace ResourceMaterials.Api.V2.Controllers{
     /// </summary>
     [ApiController]
     [ApiVersion( "2.0" )]
-    [Route( "api/v{version:apiVersion}/[controller]" )]
+    [Route( "api/v{version:apiVersion}/people" )]
     public class PeopleController : ControllerBase
     {
         /// <summary>

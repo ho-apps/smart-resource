@@ -8,6 +8,8 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.IO;
 using System.Reflection;
+using Microsoft.Extensions.FileProviders;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using static Microsoft.AspNetCore.Mvc.CompatibilityVersion;
 
 namespace ResourceMaterials.Api
@@ -66,6 +68,14 @@ namespace ResourceMaterials.Api
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
         {
             app.UseHealthChecks("/liveness");
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Themes")),
+                RequestPath = "/Themes"
+            });
+
             app.UseSwagger();
             app.UseSwaggerUI(
                 options =>
@@ -75,6 +85,12 @@ namespace ResourceMaterials.Api
                     {
                         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
+                    options.DisplayOperationId();
+                    options.DisplayRequestDuration();
+                    options.EnableFilter();
+                    options.DocExpansion(DocExpansion.None);
+                    options.DefaultModelsExpandDepth(-1);
+                    options.InjectStylesheet("/Themes/swagger-ui-themes/theme-material.css");
                 });
             app.UseMvcWithDefaultRoute();
             app.UseMvc();

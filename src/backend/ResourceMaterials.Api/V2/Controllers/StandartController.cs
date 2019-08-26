@@ -8,7 +8,7 @@ namespace ResourceMaterials.Api.V2.Controllers
 {
     [ApiController]
     [ApiVersion("2.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/standart")]
     public class StandartController : Controller
     {
         // GET

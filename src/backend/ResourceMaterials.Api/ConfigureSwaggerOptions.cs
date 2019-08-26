@@ -35,11 +35,10 @@ namespace ResourceMaterials.Api{
         {
             var info = new Info
             {
-                Title = "Sample API",
+                Title = "ResourceMaterials API",
                 Version = description.ApiVersion.ToString(),
-                Description = "A sample application with Swagger, Swashbuckle, and API versioning.",
-                Contact = new Contact { Name = "Bill Mei", Email = "bill.mei@somewhere.com" },
-                TermsOfService = "Shareware",
+                Description = "A ResourceMaterials application with Swagger, Swashbuckle, and API versioning.",
+                TermsOfService = "Freeware",
                 License = new License { Name = "MIT", Url = "https://opensource.org/licenses/MIT" }
             };
 
