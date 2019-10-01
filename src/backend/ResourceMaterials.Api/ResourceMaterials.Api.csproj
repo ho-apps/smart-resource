@@ -7,23 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="V1\Controllers\DimensionController.cs" />
-    <Compile Remove="V1\Controllers\MeasureController.cs" />
-    <Compile Remove="V2\Controllers\DimensionController.cs" />
-    <Compile Remove="V2\Controllers\MeasureController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Themes\swagger-ui-themes\theme-feeling-blue.css" />
-    <None Remove="Themes\swagger-ui-themes\theme-flattop.css" />
-    <None Remove="Themes\swagger-ui-themes\theme-material.css" />
-    <None Remove="Themes\swagger-ui-themes\theme-monokai.css" />
-    <None Remove="Themes\swagger-ui-themes\theme-muted.css" />
-    <None Remove="Themes\swagger-ui-themes\theme-newspaper.css" />
-    <None Remove="Themes\swagger-ui-themes\theme-outline.css" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Themes\swagger-ui-themes\theme-feeling-blue.css" />
     <EmbeddedResource Include="Themes\swagger-ui-themes\theme-flattop.css" />
     <EmbeddedResource Include="Themes\swagger-ui-themes\theme-material.css" />
